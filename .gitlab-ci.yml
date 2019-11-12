@@ -1,0 +1,30 @@
+image: docker:stable
+
+services:
+  - docker:stable-dind
+
+firebase-tools:
+
+  variables:
+    VERSION: "7.7.0"
+
+  script:
+    - docker build $CI_JOB_NAME --no-cache --pull
+      -f $CI_JOB_NAME/Dockerfile
+      -t $DOCKER_USER/$CI_JOB_NAME:$VERSION
+      -t $DOCKER_USER/$CI_JOB_NAME:$VERSION-alpine
+      -t $DOCKER_USER/$CI_JOB_NAME:latest
+      --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      --build-arg CI_JOB_ID=$CI_JOB_ID
+      --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID
+      --build-arg VCS_REF=$CI_COMMIT_SHA
+      --build-arg VERSION=$VERSION
+
+  after_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push $DOCKER_USER/$CI_JOB_NAME:$VERSION-alpine
+    - docker push $DOCKER_USER/$CI_JOB_NAME:$VERSION
+    - docker push $DOCKER_USER/$CI_JOB_NAME:latest
+
+  only:
+    - master

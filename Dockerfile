@@ -16,11 +16,13 @@ LABEL org.label-schema.schema-version="1.0" \
       ci_pipeline_id=${CI_PIPELINE_ID}
 ENV FIREBASE_TOOLS_VERSION=${VERSION}
 ENV HOME=/home/node
-RUN yarn global add firebase-tools@${VERSION} && \
+RUN apk --no-cache add openjdk11-jre && \
+    yarn global add firebase-tools@${VERSION} && \
     yarn cache clean && \
-    firebase -V && \
     mkdir $HOME/.cache && \
-    chown -R node:node $HOME
+    chown -R node:node $HOME && \
+    firebase -V && \
+    java -version
 USER node
 VOLUME $HOME/.cache
 WORKDIR $HOME

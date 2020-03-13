@@ -6,7 +6,7 @@ services:
 firebase-tools:
 
   variables:
-    VERSION: "7.14.0"
+    VERSION: "7.15.0"
 
   script:
     - docker build . --no-cache --pull

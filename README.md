@@ -27,3 +27,21 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 
 * Where to see the image metadata:<br>
 [the page on Microbadger][url]
+
+## Image content
+
+* Firebase CLI
+* Firebase emulators
+* Node (from the base image)
+* OpenJDK 11
+* Yarn (from the base image)
+
+## Exposed ports
+
+| Port | Emulator          |
+| ---- | ----------------- |
+| 5000 | Firebase Hosting  |
+| 5001 | Cloud Functions   |
+| 8080 | Cloud Firestore   |
+| 8085 | Cloud Pub/Sub     |
+| 9000 | Realtime Database |

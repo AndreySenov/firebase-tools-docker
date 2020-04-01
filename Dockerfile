@@ -24,7 +24,6 @@ RUN apk --no-cache add openjdk11-jre && \
     firebase setup:emulators:pubsub && \
     firebase -V && \
     java -version && \
-    mkdir $HOME/.cache && \
     chown -R node:node $HOME
 USER node
 VOLUME $HOME/.cache

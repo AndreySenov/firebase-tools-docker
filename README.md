@@ -67,7 +67,10 @@ These steps assume that you have a properly configured Firebase project with run
              "port": 4000
            }
    ```
-1. If you are using the hosting emulator, you will need to run `firebase login`.  Follow the instructions on CLI prompt to login.  It will involve navigating to a website, authenticating to Google, and then redirecting to the firebase emulators.
+1. If you are using the hosting emulator, you will need to run `firebase login`.
+    - Follow the instructions on CLI prompt to login.  It will involve navigating to a website, authenticating to Google, and then redirecting to the firebase emulators.
+    - Your login token is stored in the `.config` directory, so you won't have to repeat this step every time you start the container.
+    - It is recommended that you add `.config` to your `.gitignore` file if you haven't already.
 1. Start the emulator suite by running `firebase emulators:start`. You should be able to access the firebase emulator UI by pointing your browser to `http://localhost:4000`
 
 _**Note:** Use the following command to start the docker container AND the emulators together:_

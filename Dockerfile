@@ -21,6 +21,8 @@ EXPOSE 5001
 EXPOSE 8080
 EXPOSE 8085
 EXPOSE 9000
+EXPOSE 9005
+EXPOSE 4000
 RUN apk --no-cache add openjdk11-jre bash && \
     yarn global add firebase-tools@${VERSION} && \
     yarn cache clean && \

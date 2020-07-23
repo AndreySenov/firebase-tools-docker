@@ -49,7 +49,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 | 8085 | Cloud Pub/Sub     |
 | 9000 | Realtime Database |
 | 9005 | Login Confirm     |
-| 4000 | Emulator UI       |
+| 4000 | Emulator Suite UI |
 
 ## Running Firebase Emulators
 These steps assume that you have a properly configured Firebase project with running emulators.  Running the docker container in this way mounts your project directory into `/home/node` inside the docker container giving firebase tools access to your firebase project.

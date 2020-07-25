@@ -16,11 +16,13 @@ LABEL org.label-schema.schema-version="1.0" \
       ci_pipeline_id=${CI_PIPELINE_ID}
 ENV FIREBASE_TOOLS_VERSION=${VERSION}
 ENV HOME=/home/node
+EXPOSE 4000
 EXPOSE 5000
 EXPOSE 5001
 EXPOSE 8080
 EXPOSE 8085
 EXPOSE 9000
+EXPOSE 9005
 RUN apk --no-cache add openjdk11-jre bash && \
     yarn global add firebase-tools@${VERSION} && \
     yarn cache clean && \

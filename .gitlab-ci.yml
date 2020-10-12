@@ -4,15 +4,16 @@ services:
   - docker:stable-dind
 
 variables:
-  VERSION: "8.12.1"
+  VERSION: "8.12.1",
+  REPOSITORY: "firebase-tools"
 
 firebase-tools:
 
   script:
     - docker build . --no-cache --pull
-      -t $DOCKER_USER/$CI_JOB_NAME:$VERSION
-      -t $DOCKER_USER/$CI_JOB_NAME:$VERSION-alpine
-      -t $DOCKER_USER/$CI_JOB_NAME:latest
+      -t $DOCKER_USER/$REPOSITORY:$VERSION
+      -t $DOCKER_USER/$REPOSITORY:$VERSION-alpine
+      -t $DOCKER_USER/$REPOSITORY:latest
       --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg CI_JOB_ID=$CI_JOB_ID
       --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID
@@ -21,9 +22,9 @@ firebase-tools:
 
   after_script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - docker push $DOCKER_USER/$CI_JOB_NAME:$VERSION-alpine
-    - docker push $DOCKER_USER/$CI_JOB_NAME:$VERSION
-    - docker push $DOCKER_USER/$CI_JOB_NAME:latest
+    - docker push $DOCKER_USER/$REPOSITORY:$VERSION-alpine
+    - docker push $DOCKER_USER/$REPOSITORY:$VERSION
+    - docker push $DOCKER_USER/$REPOSITORY:latest
 
   only:
     - master
@@ -33,8 +34,8 @@ firebase-tools_node10:
 
   script:
     - docker build . -f Dockerfile.node10 --no-cache --pull
-      -t $DOCKER_USER/$CI_JOB_NAME:$VERSION-node10
-      -t $DOCKER_USER/$CI_JOB_NAME:$VERSION-node10-alpine
+      -t $DOCKER_USER/$REPOSITORY:$VERSION-node10
+      -t $DOCKER_USER/$REPOSITORY:$VERSION-node10-alpine
       --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       --build-arg CI_JOB_ID=$CI_JOB_ID
       --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID
@@ -43,8 +44,8 @@ firebase-tools_node10:
 
   after_script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - docker push $DOCKER_USER/$CI_JOB_NAME:$VERSION-node10-alpine
-    - docker push $DOCKER_USER/$CI_JOB_NAME:$VERSION-node10
+    - docker push $DOCKER_USER/$REPOSITORY:$VERSION-node10-alpine
+    - docker push $DOCKER_USER/$REPOSITORY:$VERSION-node10
 
   only:
     - master

@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 [the Issues page on Github](https://github.com/AndreySenov/firebase-tools-docker/issues)
 
 * Where to see the Dockerfile:<br>
-[Node.js LTS](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile), [Node.js 10](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile.node10)
+[Node.js LTS](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile), [Node.js 10](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile.node10), [Node.js 12](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile.node12)
 
 * Where to see the image metadata:<br>
 [the page on Microbadger][url]

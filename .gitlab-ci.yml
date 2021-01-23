@@ -49,3 +49,23 @@ firebase-tools_node10:
 
   only:
     - master
+
+firebase-tools_node12:
+
+  script:
+    - docker build . -f Dockerfile.node12 --no-cache --pull
+      -t $DOCKER_USER/$REPOSITORY:$VERSION-node12
+      -t $DOCKER_USER/$REPOSITORY:$VERSION-node12-alpine
+      --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      --build-arg CI_JOB_ID=$CI_JOB_ID
+      --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID
+      --build-arg VCS_REF=$CI_COMMIT_SHA
+      --build-arg VERSION=$VERSION
+
+  after_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push $DOCKER_USER/$REPOSITORY:$VERSION-node12-alpine
+    - docker push $DOCKER_USER/$REPOSITORY:$VERSION-node12
+
+  only:
+    - master

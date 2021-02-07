@@ -46,7 +46,8 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 | 8080 | Cloud Firestore   |
 | 8085 | Cloud Pub/Sub     |
 | 9000 | Realtime Database |
-| 9005 | Authentication    |
+| 9005 | Firebase Login    |
+| 9099 | Authentication    |
 
 ## Guides
 

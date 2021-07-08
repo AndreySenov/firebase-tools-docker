@@ -4,7 +4,7 @@ services:
   - docker:stable-dind
 
 variables:
-  VERSION: "9.14.0"
+  VERSION: "9.15.0"
   REPOSITORY: "firebase-tools"
 
 firebase-tools:

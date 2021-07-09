@@ -48,6 +48,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 | 9000 | Realtime Database |
 | 9005 | Firebase Login    |
 | 9099 | Authentication    |
+| 9199 | Cloud Storage     |
 
 ## Guides
 

@@ -8,7 +8,7 @@ on:
       - '**'
 
 env:
-  REPOSITORY: firebase-tools
+  REPOSITORY: andreysenov/firebase-tools
   VERSION: 9.18.0
 
 jobs:
@@ -44,8 +44,8 @@ jobs:
         run: >
           docker build . --no-cache --pull
           -f ${{ matrix.context.dockerfile }}
-          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
-          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
           --build-arg GITHUB_WORKFLOW=${GITHUB_WORKFLOW}
@@ -63,21 +63,21 @@ jobs:
       - name: Publish the Docker image
         if: ${{ github.event_name != 'pull_request' }}
         run: >
-          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
-          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
 
       - name: Publish the Docker image (Latest tag)
         if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
         run: >
-          docker tag ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
-          ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
+          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          ${{ env.REPOSITORY }}:${{ env.VERSION }}
 
-          docker tag ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
-          ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
+          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
 
-          docker tag ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
-          ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest
+          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          ${{ env.REPOSITORY }}:latest
 
-          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
-          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
-          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest
+          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}
+          docker push ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
+          docker push ${{ env.REPOSITORY }}:latest

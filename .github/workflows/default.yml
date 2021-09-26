@@ -69,15 +69,9 @@ jobs:
       - name: Publish the Docker image (Latest)
         if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
         run: |
-          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
-          ${{ env.REPOSITORY }}:${{ env.VERSION }} \
-
-          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
-          ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }} \
-
-          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
-          ${{ env.REPOSITORY }}:latest \
-
-          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }} \
-          docker push ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }} \
+          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }} ${{ env.REPOSITORY }}:${{ env.VERSION }}
+          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }} ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
+          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }} ${{ env.REPOSITORY }}:latest
+          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}
+          docker push ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
           docker push ${{ env.REPOSITORY }}:latest

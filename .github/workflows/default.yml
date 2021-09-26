@@ -62,13 +62,13 @@ jobs:
 
       - name: Publish the Docker image
         if: ${{ github.event_name != 'pull_request' }}
-        run: >
+        run: |
           docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }} \
           docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
 
       - name: Publish the Docker image (Latest)
         if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
-        run: >
+        run: |
           docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
           ${{ env.REPOSITORY }}:${{ env.VERSION }} \
 

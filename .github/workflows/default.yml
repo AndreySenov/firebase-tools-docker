@@ -14,6 +14,27 @@ env:
 jobs:
   firebase-tools:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        context: [
+          {
+            dockerfile: Dockerfile,
+            node: node-lts,
+            os: alpine
+          },
+          {
+            dockerfile: Dockerfile.node12,
+            node: node-12,
+            os: alpine
+          },
+          {
+            dockerfile: Dockerfile.node10,
+            node: node-10,
+            os: alpine
+          }
+        ]
+
     steps:
 
       - name: Checkout the repository
@@ -22,23 +43,41 @@ jobs:
       - name: Build the Docker image
         run: >
           docker build . --no-cache --pull
-          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
-          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-alpine
-          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest
+          -f ${{ matrix.context.dockerfile }}
+          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
-          --build-arg GITHUB_WORKFLOW=$GITHUB_WORKFLOW
-          --build-arg GITHUB_RUN_ID=$GITHUB_RUN_ID
-          --build-arg GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER
-          --build-arg GITHUB_JOB=$GITHUB_JOB
-          --build-arg GITHUB_ACTION=$GITHUB_ACTION
-          --build-arg GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME
-          --build-arg VCS_REF=$GITHUB_SHA
+          --build-arg GITHUB_WORKFLOW=${GITHUB_WORKFLOW}
+          --build-arg GITHUB_RUN_ID=${GITHUB_RUN_ID}
+          --build-arg GITHUB_RUN_NUMBER=${GITHUB_RUN_NUMBER}
+          --build-arg GITHUB_JOB=${GITHUB_JOB}
+          --build-arg GITHUB_ACTION=${GITHUB_ACTION}
+          --build-arg GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME}
+          --build-arg VCS_REF=${GITHUB_SHA}
+
+      - name: Login to Docker Hub
+        if: ${{ github.event_name != 'pull_request' }}
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Publish the Docker image
         if: ${{ github.event_name != 'pull_request' }}
         run: >
-          docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}}-alpine
+          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+
+      - name: Publish the Docker image (Latest tag)
+        if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
+        run: >
+          docker tag ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
+
+          docker tag ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
+
+          docker tag ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest
+
           docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
+          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
           docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest

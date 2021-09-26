@@ -10,8 +10,6 @@ on:
 env:
   REPOSITORY: firebase-tools
   VERSION: 9.18.0
-  IMAGE: ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}
-  TAG: ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
 
 jobs:
   firebase-tools:
@@ -41,6 +39,6 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         run: >
           docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push ${{ env.TAG }}-alpine
-          docker push ${{ env.TAG }}
-          docker push ${{ env.IMAGE }}:latest
+          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}}-alpine
+          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
+          docker push ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest

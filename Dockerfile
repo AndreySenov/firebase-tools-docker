@@ -11,13 +11,7 @@ LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.description="Firebase CLI on the NodeJS image" \
       org.label-schema.url="https://github.com/firebase/firebase-tools/" \
       org.label-schema.vcs-url="https://github.com/AndreySenov/firebase-tools-docker/" \
-      org.label-schema.vcs-ref=${VCS_REF} \
-      github_workflow=${GITHUB_WORKFLOW} \
-      github_run_id=${GITHUB_RUN_ID} \
-      github_run_number=${GITHUB_RUN_NUMBER} \
-      github_job=${GITHUB_JOB} \
-      github_action=${GITHUB_ACTION} \
-      github_event_name=${GITHUB_EVENT_NAME}
+      org.label-schema.vcs-ref=${VCS_REF}
 ENV FIREBASE_TOOLS_VERSION=${VERSION}
 ENV HOME=/home/node
 EXPOSE 4000

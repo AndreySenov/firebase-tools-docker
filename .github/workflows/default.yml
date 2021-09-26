@@ -48,13 +48,13 @@ jobs:
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
-          --build-arg GITHUB_WORKFLOW=${{GITHUB_WORKFLOW}}
-          --build-arg GITHUB_RUN_ID=${{GITHUB_RUN_ID}}
-          --build-arg GITHUB_RUN_NUMBER=${{GITHUB_RUN_NUMBER}}
-          --build-arg GITHUB_JOB=${{GITHUB_JOB}}
-          --build-arg GITHUB_ACTION=${{GITHUB_ACTION}}
-          --build-arg GITHUB_EVENT_NAME=${{GITHUB_EVENT_NAME}}
-          --build-arg VCS_REF=${{GITHUB_SHA}}
+          --build-arg GITHUB_WORKFLOW=${{ github.workflow }}
+          --build-arg GITHUB_RUN_ID=${{ github.run_id }}
+          --build-arg GITHUB_RUN_NUMBER=${{ github.run_number }}
+          --build-arg GITHUB_JOB=${{ github.job }}
+          --build-arg GITHUB_ACTION=${{ github.action }}
+          --build-arg GITHUB_EVENT_NAME=${{ github.event_name }}
+          --build-arg VCS_REF=${{ github.sha }}
 
       - name: Login to Docker Hub
         if: ${{ github.event_name != 'pull_request' }}

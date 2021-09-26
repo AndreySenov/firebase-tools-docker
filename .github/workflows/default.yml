@@ -22,18 +22,18 @@ jobs:
       - name: Build the Docker image
         run: >
           docker build . --no-cache --pull
-          -t ${{ env.TAG }}
-          -t ${{ env.TAG }}-alpine
-          -t ${{ env.IMAGE }}:latest
+          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}
+          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:${{ env.VERSION }}-alpine
+          -t ${{ secrets.DOCKER_USER }}/${{ env.REPOSITORY }}:latest
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
-          --build-arg GITHUB_WORKFLOW=${{ env.GITHUB_WORKFLOW }}
-          --build-arg GITHUB_RUN_ID=${{ env.GITHUB_RUN_ID }}
-          --build-arg GITHUB_RUN_NUMBER=${{ env.GITHUB_RUN_NUMBER }}
-          --build-arg GITHUB_JOB=${{ env.GITHUB_JOB }}
-          --build-arg GITHUB_ACTION=${{ env.GITHUB_ACTION }}
-          --build-arg GITHUB_EVENT_NAME=${{ env.GITHUB_EVENT_NAME }}
-          --build-arg VCS_REF=${{ env.GITHUB_SHA }}
+          --build-arg GITHUB_WORKFLOW=$GITHUB_WORKFLOW
+          --build-arg GITHUB_RUN_ID=$GITHUB_RUN_ID
+          --build-arg GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER
+          --build-arg GITHUB_JOB=$GITHUB_JOB
+          --build-arg GITHUB_ACTION=$GITHUB_ACTION
+          --build-arg GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME
+          --build-arg VCS_REF=$GITHUB_SHA
 
       - name: Publish the Docker image
         if: ${{ github.event_name != 'pull_request' }}

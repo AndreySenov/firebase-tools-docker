@@ -2,11 +2,8 @@
 
 [Firebase CLI](https://www.npmjs.com/package/firebase-tools) installed globally over the official [NodeJS image](https://hub.docker.com/_/node)
 
-[url]: https://microbadger.com/images/andreysenov/firebase-tools
-
-[![](https://images.microbadger.com/badges/version/andreysenov/firebase-tools.svg)][url]
-[![](https://images.microbadger.com/badges/image/andreysenov/firebase-tools.svg)][url]
-[![](https://images.microbadger.com/badges/commit/andreysenov/firebase-tools.svg)][url]
+![version](https://img.shields.io/docker/v/andreysenov/firebase-tools?sort=semver)
+![build status](https://github.com/AndreySenov/firebase-tools-docker/actions/workflows/default.yml/badge.svg)
 
 ```
 THIS DOCKER IMAGE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
@@ -23,10 +20,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 [the Issues page on Github](https://github.com/AndreySenov/firebase-tools-docker/issues)
 
 * Where to see the Dockerfile:<br>
-[Node.js LTS](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile), [Node.js 10](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile.node10), [Node.js 12](https://github.com/AndreySenov/firebase-tools-docker/blob/master/Dockerfile.node12)
-
-* Where to see the image metadata:<br>
-[the page on Microbadger][url]
+[Node.js LTS](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile), [Node.js 10](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node10), [Node.js 12](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node12)
 
 ## Image content
 
@@ -52,4 +46,4 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 
 ## Guides
 
-[Running Firebase Emulators](https://github.com/AndreySenov/firebase-tools-docker/blob/master/doc/guide/running_firebase_emulators.md)
+[Running Firebase Emulators](https://github.com/AndreySenov/firebase-tools-docker/blob/main/doc/guide/running_firebase_emulators.md)

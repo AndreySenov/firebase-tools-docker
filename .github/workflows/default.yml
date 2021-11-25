@@ -53,6 +53,8 @@ jobs:
           -f ${{ matrix.context.dockerfile }}
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}
+          -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}-${{ matrix.context.os }}
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
           --build-arg VCS_REF=${{ github.sha }}

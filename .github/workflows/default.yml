@@ -34,12 +34,7 @@ jobs:
             dockerfile: Dockerfile.node12,
             node: node-12,
             os: alpine
-          }#,
-          #{
-          #  dockerfile: Dockerfile.node10,
-          #  node: node-10,
-          #  os: alpine
-          #}
+          }
         ]
 
     steps:

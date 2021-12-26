@@ -1,7 +1,5 @@
 FROM node:lts-alpine
 ARG BUILD_DATE
-ARG CI_JOB_ID
-ARG CI_PIPELINE_ID
 ARG VERSION
 ARG VCS_REF
 LABEL org.label-schema.schema-version="1.0" \

@@ -26,6 +26,11 @@ jobs:
             os: alpine
           },
           {
+            dockerfile: Dockerfile.node16,
+            node: node-16,
+            os: alpine
+          },
+          {
             dockerfile: Dockerfile.node14,
             node: node-14,
             os: alpine

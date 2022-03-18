@@ -3,6 +3,7 @@
 [Firebase CLI](https://www.npmjs.com/package/firebase-tools) installed globally over the official [NodeJS image](https://hub.docker.com/_/node)
 
 ![version](https://img.shields.io/docker/v/andreysenov/firebase-tools?sort=semver)
+![image_pulls](https://img.shields.io/docker/pulls/andreysenov/firebase-tools?label=pulls)
 ![build status](https://github.com/AndreySenov/firebase-tools-docker/actions/workflows/default.yml/badge.svg)
 
 ```

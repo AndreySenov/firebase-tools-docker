@@ -4,13 +4,13 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 3 * * *'
+    - cron: "0 3 * * *"
   pull_request:
     branches:
-      - '**'
+      - "**"
 
 env:
-  REPOSITORY: alexjball/firebase-tools
+  REPOSITORY: andreysenov/firebase-tools
   VERSION: 11.7.0
 
 jobs:
@@ -20,26 +20,14 @@ jobs:
 
     strategy:
       matrix:
-        context: [
-          {
-            dockerfile: Dockerfile,
-            node: node-lts,
-            os: alpine
-          },
-          {
-            dockerfile: Dockerfile.node16,
-            node: node-16,
-            os: alpine
-          },
-          {
-            dockerfile: Dockerfile.node14,
-            node: node-14,
-            os: alpine
-          }
-        ]
+        context:
+          [
+            { dockerfile: Dockerfile, node: node-lts, os: alpine },
+            { dockerfile: Dockerfile.node16, node: node-16, os: alpine },
+            { dockerfile: Dockerfile.node14, node: node-14, os: alpine },
+          ]
 
     steps:
-
       - name: Checkout the repository
         uses: actions/checkout@v2
 

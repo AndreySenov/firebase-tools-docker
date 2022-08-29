@@ -42,9 +42,18 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Build the Docker image
         run: >
-          docker build . --no-cache --pull
+          docker buildx build . --no-cache --pull
+          --platform linux/amd64,linux/arm64
           -f ${{ matrix.context.dockerfile }}
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}

@@ -23,22 +23,50 @@ jobs:
           {
             dockerfile: Dockerfile,
             node: node-lts,
-            os: alpine
+            os: alpine,
+            platform: linux/amd64
           },
           {
             dockerfile: Dockerfile.node18,
             node: node-18,
-            os: alpine
+            os: alpine,
+            platform: linux/amd64
           },
           {
             dockerfile: Dockerfile.node16,
             node: node-16,
-            os: alpine
+            os: alpine,
+            platform: linux/amd64
           },
           {
             dockerfile: Dockerfile.node14,
             node: node-14,
-            os: alpine
+            os: alpine,
+            platform: linux/amd64
+          },
+          {
+            dockerfile: Dockerfile,
+            node: node-lts,
+            os: alpine,
+            platform: linux/arm64
+          },
+          {
+            dockerfile: Dockerfile.node18,
+            node: node-18,
+            os: alpine,
+            platform: linux/arm64
+          },
+          {
+            dockerfile: Dockerfile.node16,
+            node: node-16,
+            os: alpine,
+            platform: linux/arm64
+          },
+          {
+            dockerfile: Dockerfile.node14,
+            node: node-14,
+            os: alpine,
+            platform: linux/arm64
           }
         ]
 
@@ -55,6 +83,7 @@ jobs:
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
           -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}
           -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}-${{ matrix.context.os }}
+          --platform ${{ matrix.context.platform }}
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
           --build-arg VCS_REF=${{ github.sha }}

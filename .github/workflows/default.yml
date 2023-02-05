@@ -26,28 +26,24 @@ jobs:
             node: node-lts,
             os: alpine,
             platforms: 'linux/amd64,linux/arm64',
-            extraArgs: "-t ${{ env.REPOSITORY }}:${{ env.VERSION }} -t ${{ env.REPOSITORY }}:latest-alpine -t ${{ env.REPOSITORY }}:latest",
           },
           {
             dockerfile: Dockerfile.node18,
             node: node-18,
             os: alpine,
             platforms: 'linux/amd64,linux/arm64',
-            extraArgs: '',
           },
           {
             dockerfile: Dockerfile.node16,
             node: node-16,
             os: alpine,
             platforms: 'linux/amd64,linux/arm64',
-            extraArgs: '',
           },
           {
             dockerfile: Dockerfile.node14,
             node: node-14,
             os: alpine,
             platforms: 'linux/amd64,linux/arm64',
-            extraArgs: '',
           }
         ]
 
@@ -68,6 +64,10 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set extra tags if needed
+        if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
+        run: echo EXTRA_TAGS="-t ${{ env.REPOSITORY }}:${{ env.VERSION }} -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }} -t ${{ env.REPOSITORY }}:latest" >> $GITHUB_ENV
+
       - name: Build the Docker image
         run: >
           docker buildx build . --push --no-cache --pull
@@ -77,7 +77,7 @@ jobs:
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
           -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}
           -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}-${{ matrix.context.os }}
-          ${{ matrix.context.extraArgs }}
+          ${EXTRA_TAGS}
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           --build-arg VERSION=${{ env.VERSION }}
           --build-arg VCS_REF=${{ github.sha }}

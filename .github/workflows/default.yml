@@ -60,7 +60,7 @@ jobs:
 
       - name: Build the Docker image
         run: >
-          docker buildx build . --no-cache --pull
+          docker buildx build . --push --no-cache --pull
           --platform ${{ matrix.context.platforms }}
           -f ${{ matrix.context.dockerfile }}
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}

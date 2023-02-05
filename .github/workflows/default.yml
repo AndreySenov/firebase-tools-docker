@@ -8,10 +8,9 @@ on:
   pull_request:
     branches:
       - '**'
-  workflow_dispatch:
 
 env:
-  REPOSITORY: trhodes/firebase-tools
+  REPOSITORY: andreysenov/firebase-tools
   VERSION: 11.23.1
 
 jobs:

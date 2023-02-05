@@ -23,22 +23,26 @@ jobs:
           {
             dockerfile: Dockerfile,
             node: node-lts,
-            os: alpine
+            os: alpine,
+            platforms: 'linux/amd64,linux/arm64',
           },
           {
             dockerfile: Dockerfile.node18,
             node: node-18,
-            os: alpine
+            os: alpine,
+            platforms: 'linux/amd64,linux/arm64',
           },
           {
             dockerfile: Dockerfile.node16,
             node: node-16,
-            os: alpine
+            os: alpine,
+            platforms: 'linux/amd64,linux/arm64',
           },
           {
             dockerfile: Dockerfile.node14,
             node: node-14,
-            os: alpine
+            os: alpine,
+            platforms: 'linux/amd64,linux/arm64',
           }
         ]
 
@@ -47,35 +51,36 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
-      - name: Build the Docker image
-        run: >
-          docker build . --no-cache --pull
-          -f ${{ matrix.context.dockerfile }}
-          -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
-          -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
-          -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}
-          -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}-${{ matrix.context.os }}
-          --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          --build-arg VERSION=${{ env.VERSION }}
-          --build-arg VCS_REF=${{ github.sha }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: 'arm64'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Docker Hub
         if: ${{ github.event_name != 'pull_request' }}
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Publish the Docker image
+      - name: Set push argument
         if: ${{ github.event_name != 'pull_request' }}
-        run: |
-          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
-          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
-          docker push ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}
+        run: echo PUSH_ARG="--push" >> $GITHUB_ENV
 
-      - name: Publish the Docker image (Latest)
+      - name: Set extra tags if needed
         if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
-        run: |
-          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }} ${{ env.REPOSITORY }}:${{ env.VERSION }}
-          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }} ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
-          docker tag ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }} ${{ env.REPOSITORY }}:latest
-          docker push ${{ env.REPOSITORY }}:${{ env.VERSION }}
-          docker push ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }}
-          docker push ${{ env.REPOSITORY }}:latest
+        run: echo EXTRA_TAGS="-t ${{ env.REPOSITORY }}:${{ env.VERSION }} -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }} -t ${{ env.REPOSITORY }}:latest" >> $GITHUB_ENV
+
+      - name: Build the Docker image
+        run: >
+          docker buildx build . ${PUSH_ARG} --no-cache --pull
+          --platform ${{ matrix.context.platforms }}
+          -f ${{ matrix.context.dockerfile }}
+          -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}
+          -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}-${{ matrix.context.os }}
+          -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}
+          -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.node }}-${{ matrix.context.os }}
+          ${EXTRA_TAGS}
+          --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          --build-arg VERSION=${{ env.VERSION }}
+          --build-arg VCS_REF=${{ github.sha }}

@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 env:
-  REPOSITORY: andreysenov/firebase-tools
+  REPOSITORY: trhodes/firebase-tools
   VERSION: 11.23.1
 
 jobs:

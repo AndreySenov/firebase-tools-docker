@@ -63,13 +63,17 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set push argument
+        if: ${{ github.event_name != 'pull_request' }}
+        run: echo PUSH_ARG="--push" >> $GITHUB_ENV
+
       - name: Set extra tags if needed
         if: ${{ github.event_name != 'pull_request' && matrix.context.dockerfile == 'Dockerfile' }}
         run: echo EXTRA_TAGS="-t ${{ env.REPOSITORY }}:${{ env.VERSION }} -t ${{ env.REPOSITORY }}:latest-${{ matrix.context.os }} -t ${{ env.REPOSITORY }}:latest" >> $GITHUB_ENV
 
       - name: Build the Docker image
         run: >
-          docker buildx build . --push --no-cache --pull
+          docker buildx build . ${PUSH_ARG} --no-cache --pull
           --platform ${{ matrix.context.platforms }}
           -f ${{ matrix.context.dockerfile }}
           -t ${{ env.REPOSITORY }}:${{ env.VERSION }}-${{ matrix.context.node }}

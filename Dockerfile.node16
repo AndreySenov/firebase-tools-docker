@@ -21,6 +21,8 @@ EXPOSE 9000
 EXPOSE 9005
 EXPOSE 9099
 EXPOSE 9199
+RUN apt-get update -y
+RUN apt-get upgrade -y
 RUN apt-get install -y openjdk-11-jre bash && \
     yarn global add firebase-tools@${VERSION} && \
     yarn cache clean && \

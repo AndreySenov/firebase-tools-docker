@@ -24,7 +24,7 @@ EXPOSE 9199
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y openjdk-11-jre bash && \
-    yarn global add firebase-tools@${VERSION} && \
+    yarn global add firebase-tools@${VERSION} --network-timeout 100000 && \
     yarn cache clean && \
     firebase setup:emulators:database && \
     firebase setup:emulators:firestore && \

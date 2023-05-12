@@ -38,7 +38,9 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * Firebase emulators
 * Node.js (from the base image)
 * OpenJDK 11
+* Python 3
 * Yarn (from the base image)
+* autoconf, automake, bash, g++, libtool, make
 
 ## Exposed ports
 

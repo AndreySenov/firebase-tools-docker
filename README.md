@@ -22,8 +22,6 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * [latest-node-18](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node18)
 * [latest-node-16](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node16)
 * [latest-node-14](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node14)
-* [~~10.9.2-node-12~~](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node12)
-* [~~9.22.0-node-10~~](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node10)
 
 #### Where to find more versions and tags
 [the Tags page on Docker Hub](https://hub.docker.com/r/andreysenov/firebase-tools/tags)

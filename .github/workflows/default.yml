@@ -37,12 +37,6 @@ jobs:
             node: node-16,
             os: alpine,
             platforms: 'linux/amd64,linux/arm64',
-          },
-          {
-            dockerfile: Dockerfile.node14,
-            node: node-14,
-            os: alpine,
-            platforms: 'linux/amd64,linux/arm64',
           }
         ]
 

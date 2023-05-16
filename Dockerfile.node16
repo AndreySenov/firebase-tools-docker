@@ -22,7 +22,7 @@ EXPOSE 9005
 EXPOSE 9099
 EXPOSE 9199
 RUN apk --no-cache add autoconf automake bash g++ libtool make openjdk11-jre python3 && \
-    yarn global add firebase-tools@${VERSION} && \
+    yarn global add firebase-tools@${VERSION} typescript && \
     yarn cache clean && \
     firebase setup:emulators:database && \
     firebase setup:emulators:firestore && \

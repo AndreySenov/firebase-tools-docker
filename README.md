@@ -36,6 +36,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * Node.js (from the base image)
 * OpenJDK 11
 * Python 3
+* TypeScript
 * Yarn (from the base image)
 * autoconf, automake, bash, g++, libtool, make
 

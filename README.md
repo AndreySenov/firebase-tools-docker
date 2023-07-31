@@ -34,7 +34,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * Firebase CLI
 * Firebase emulators
 * Node.js (from the base image)
-* OpenJDK 11
+* OpenJDK 17 (or 11 for Node 16)
 * Python 3
 * TypeScript
 * Yarn (from the base image)

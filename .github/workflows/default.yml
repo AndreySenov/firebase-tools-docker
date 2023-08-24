@@ -11,7 +11,7 @@ on:
 
 env:
   REPOSITORY: andreysenov/firebase-tools
-  VERSION: 12.5.0
+  VERSION: 12.5.1
 
 jobs:
   firebase-tools:

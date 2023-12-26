@@ -29,7 +29,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 [the Issues page on Github](https://github.com/AndreySenov/firebase-tools-docker/issues)
 
 
-## Image content
+## Key image components
 
 * Firebase CLI
 * Firebase emulators
@@ -38,7 +38,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * Python 3
 * TypeScript
 * Yarn (from the base image)
-* autoconf, g++, libtool, make, and their dependencies
+* autoconf, g++, libtool, make
 
 ## Exposed ports
 

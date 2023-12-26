@@ -19,8 +19,8 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 
 #### Tags & Dockerfiles
 * [latest, latest-node-lts](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile)
+* [latest-node-20](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node20)
 * [latest-node-18](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node18)
-* [latest-node-16](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node16)
 
 #### Where to find more versions and tags
 [the Tags page on Docker Hub](https://hub.docker.com/r/andreysenov/firebase-tools/tags)
@@ -38,7 +38,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * Python 3
 * TypeScript
 * Yarn (from the base image)
-* autoconf, automake, bash, g++, libtool, make
+* autoconf, g++, libtool, make
 
 ## Exposed ports
 

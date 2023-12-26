@@ -21,6 +21,7 @@ EXPOSE 9000
 EXPOSE 9005
 EXPOSE 9099
 EXPOSE 9199
+SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y autoconf g++ libtool make openjdk-17-jre-headless python3 && \
     npm install -g firebase-tools@${VERSION} typescript && \
     npm cache clean --force && \
@@ -34,4 +35,4 @@ RUN apt-get update && apt-get install -y autoconf g++ libtool make openjdk-17-jr
 USER node
 VOLUME $HOME/.cache
 WORKDIR $HOME
-CMD ["sh"]
+CMD ["bash"]

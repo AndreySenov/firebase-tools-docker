@@ -1,6 +1,6 @@
 # firebase-tools
 
-[Firebase CLI](https://www.npmjs.com/package/firebase-tools) installed globally over the official [NodeJS image](https://hub.docker.com/_/node)
+Firebase [CLI](https://www.npmjs.com/package/firebase-tools), [Emulators](https://firebase.google.com/docs/emulator-suite), and related software installed over the official [NodeJS image](https://hub.docker.com/_/node)
 
 ![version](https://img.shields.io/docker/v/andreysenov/firebase-tools?sort=semver)
 ![image_pulls](https://img.shields.io/docker/pulls/andreysenov/firebase-tools?label=pulls)
@@ -38,7 +38,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 * Python 3
 * TypeScript
 * Yarn (from the base image)
-* autoconf, g++, libtool, make
+* autoconf, g++, libtool, make, and their dependencies
 
 ## Exposed ports
 

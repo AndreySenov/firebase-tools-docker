@@ -31,12 +31,6 @@ jobs:
             node: node-20,
             os: slim,
             platforms: 'linux/amd64,linux/arm64',
-          },
-          {
-            dockerfile: Dockerfile.node18,
-            node: node-18,
-            os: slim,
-            platforms: 'linux/amd64,linux/arm64',
           }
         ]
 

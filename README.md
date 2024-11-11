@@ -19,6 +19,7 @@ OUT OF OR IN CONNECTION WITH THE DOCKER IMAGE OR THE USE OR OTHER DEALINGS IN TH
 
 #### Tags & Dockerfiles
 * [latest, latest-node-lts](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile)
+* [latest-node-22](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node22)
 * [latest-node-20](https://github.com/AndreySenov/firebase-tools-docker/blob/main/Dockerfile.node20)
 
 #### Where to find more versions and tags

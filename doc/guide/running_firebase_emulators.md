@@ -3,7 +3,7 @@ These steps assume that you have a properly configured Firebase project with run
 
 1. Start this docker image with the following command:
     ```
-    docker run -p 9199:9199 -p 9099:9099 -p 9005:9005 -p 9000:9000 -p 8085:8085 -p 8080:8080 -p 5001:5001 -p 5000:5000 -p 4000:4000 -v /path/to/project:/home/node --name firebase-tools andreysenov/firebase-tools
+    docker run -it -p 9199:9199 -p 9099:9099 -p 9005:9005 -p 9000:9000 -p 8085:8085 -p 8080:8080 -p 5001:5001 -p 5000:5000 -p 4000:4000 -v /path/to/project:/home/node --name firebase-tools andreysenov/firebase-tools
     ```
 1. From the shell prompt running in the docker container, run `firebase init emulators` to update the `firebase.json` file in the root of your project. When asked whether you want to enable the emulator UI, choose "yes".
 1. Edit your `firebase.json` file to contain this snippet:

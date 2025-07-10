@@ -11,7 +11,7 @@ on:
 
 env:
   REPOSITORY: andreysenov/firebase-tools
-  VERSION: 14.10.0
+  VERSION: 14.10.1
 
 jobs:
   firebase-tools:

@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:lts-trixie-slim
 ARG BUILD_DATE
 ARG VERSION
 ARG VCS_REF
@@ -22,10 +22,7 @@ EXPOSE 9005
 EXPOSE 9099
 EXPOSE 9199
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update && apt-get install -y autoconf g++ libtool make python3 curl gnupg && \
-    curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /usr/share/keyrings/adoptium-archive-keyring.gpg > /dev/null && \
-    echo "deb [signed-by=/usr/share/keyrings/adoptium-archive-keyring.gpg] https://packages.adoptium.net/artifactory/deb bookworm main" | tee /etc/apt/sources.list.d/adoptium.list > /dev/null && \
-    apt-get update && apt-get install -y temurin-21-jre && \
+RUN apt-get update && apt-get install -y autoconf g++ libtool make openjdk-21-jre-headless python3 && \
     npm install -g firebase-tools@${VERSION} typescript && \
     npm cache clean --force && \
     firebase setup:emulators:database && \

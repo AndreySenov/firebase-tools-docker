@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:lts-trixie-slim
 ARG BUILD_DATE
 ARG VERSION
 ARG VCS_REF
@@ -22,7 +22,7 @@ EXPOSE 9005
 EXPOSE 9099
 EXPOSE 9199
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update && apt-get install -y autoconf g++ libtool make openjdk-17-jre-headless python3 && \
+RUN apt-get update && apt-get install -y autoconf g++ libtool make openjdk-25-jre-headless python3 && \
     npm install -g firebase-tools@${VERSION} typescript && \
     npm cache clean --force && \
     firebase setup:emulators:database && \
